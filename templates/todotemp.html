@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TO DO</title>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{ url_for('static' , filename='todo.css') }}" rel="stylesheet">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="todolist not-done">
+             <h1 class="todo-footer">Todos</h1><br>
+                    <form action="{{ url_for('add') }}" method="POST">
+                        <input type="text" class="form-control add-todo" placeholder="Add todo" name="todoitem">
+                        <br>
+                        <input type="submit" value="Add Item">
+                    </form>
+                    <br>
+                <div>
+                    <h1 class="todo-footer"> Items Left </h1>
+                    <ul>
+                        {% for todo in incomplete %}
+                        <li style="font-size: 25pt">{{ todo.text }} <a href="{{ url_for('complete', id=todo.id) }}" style="font-size: 10pt">Mark As Complete</a></li>
+                        {% endfor %}    
+                    </ul>
+        
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="todolist">
+             <h1 class="todo-footer">Already Done</h1>
+                <ul>
+                    {% for todo in complete %}
+                    <li style="font-size: 30pt">{{ todo.text }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
