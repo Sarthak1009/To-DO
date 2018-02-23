@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+from flask.ext.sqlalchemy import SQLAlchemy
 
-from flask_heroku import Heroku 
+from flask.ext.heroku import Heroku 
 
 app = Flask(__name__)
 
