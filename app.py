@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
-from flask.ext.heroku import Heroku 
+from flask_heroku import Heroku 
 
 app = Flask(__name__)
 
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:PassworD@localhost/flash'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://nmdlbicjahjaum:3c88be01de7583a08cad2bbd0192543a0dd217b2184e27d814009d9fc84b8498@ec2-54-227-252-237.compute-1.amazonaws.com:5432/d11iiqdpflnsju'
 heroku = Heroku()
 db = SQLAlchemy(app)
 
