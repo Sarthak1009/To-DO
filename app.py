@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+rom flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 from flask_heroku import Heroku 
@@ -8,6 +8,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://nmdlbicjahjaum:3c88be01de7583a08cad2bbd0192543a0dd217b2184e27d814009d9fc84b8498@ec2-54-227-252-237.compute-1.amazonaws.com:5432/d11iiqdpflnsju'
 heroku = Heroku()
 db = SQLAlchemy(app)
+
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -29,6 +30,16 @@ def add():
 
     return redirect(url_for('index'))
 
+
+@app.route('/update/<id>', methods=['POST'])
+def update(id):
+    todo = request.form.get("todoitemupdate")
+    update_this =  Todo.query.get(id)
+    update_this.text = todo
+    db.session.commit()
+
+    return redirect(url_for('index'))
+
 @app.route('/complete/<id>')
 def complete(id):
 
@@ -37,6 +48,15 @@ def complete(id):
     db.session.commit()
     
     return redirect(url_for('index'))
+
+@app.route('/delete/<id>')
+def delete(id):
+    todo_id = Todo.query.get(id)
+    db.session.delete(todo_id)
+    db.session.commit()
+    
+    return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5003)
