@@ -5,7 +5,7 @@ from flask_heroku import Heroku
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://nmdlbicjahjaum:3c88be01de7583a08cad2bbd0192543a0dd217b2184e27d814009d9fc84b8498@ec2-54-227-252-237.compute-1.amazonaws.com:5432/d11iiqdpflnsju'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'Your DB URI'
 heroku = Heroku()
 db = SQLAlchemy(app)
 
